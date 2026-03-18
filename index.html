@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Project Title</title>
+  <meta name="description" content="Project page for Your Project Title" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #f5f7ff;
+      --muted: #b8c0e0;
+      --accent: #7c9cff;
+      --accent-2: #66e0c2;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      --radius: 20px;
+      --maxw: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 156, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(102, 224, 194, 0.14), transparent 25%),
+        linear-gradient(180deg, #0a0f1e 0%, #0d1327 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+
+    .container {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(10, 15, 30, 0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-inner {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 72px 0 42px;
+    }
+
+    .hero-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 44px 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-box::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(124,156,255,0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 860px;
+      margin-bottom: 24px;
+    }
+
+    .authors {
+      color: #dbe1ff;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .affiliations {
+      color: var(--muted);
+      margin-bottom: 26px;
+      font-size: 0.98rem;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), #98aefe);
+      color: white;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+
+    .hero-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 28px 0;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .abstract p {
+      color: #e8ebff;
+      font-size: 1rem;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+    }
+
+    .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .stats-grid,
+    .gallery-grid,
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .stat h3,
+    .link-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .stat p,
+    .link-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .gallery-item img {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 8px;
+    }
+
+    .bibtex {
+      position: relative;
+      overflow: hidden;
+    }
+
+    pre {
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 18px;
+      color: #eaf0ff;
+      font-size: 0.93rem;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(124, 156, 255, 0.12);
+      color: #dfe6ff;
+      border: 1px solid rgba(124, 156, 255, 0.2);
+      font-size: 0.86rem;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .media-grid,
+      .stats-grid,
+      .gallery-grid,
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-box {
+        padding: 32px 22px;
+      }
+
+      .nav-inner {
+        align-items: flex-start;
+        gap: 12px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Your Project</div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#video">Video</a>
+        <a href="#highlights">Highlights</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-box">
+        <div class="tag">Project Page</div>
+        <h1>Your Project Title</h1>
+        <p class="subtitle">
+          A clean and modern project webpage template for showcasing your paper, code,
+          demos, and results on GitHub Pages.
+        </p>
+
+        <div class="authors">
+          Author A<sup>1</sup>, Author B<sup>2</sup>, Author C<sup>1</sup>
+        </div>
+        <div class="affiliations">
+          <sup>1</sup>Your University &nbsp; • &nbsp;
+          <sup>2</sup>Your Lab / Company
+        </div>
+
+        <div class="button-row">
+          <a class="btn btn-primary" href="#" target="_blank">📄 Paper</a>
+          <a class="btn btn-secondary" href="#" target="_blank">💻 Code</a>
+          <a class="btn btn-secondary" href="#" target="_blank">🎥 Video</a>
+          <a class="btn btn-secondary" href="#" target="_blank">📊 Dataset</a>
+        </div>
+
+        <div class="hero-note">
+          Replace the placeholders with your actual links, video, figures, and abstract.
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="container">
+        <h2 class="section-title">Overview</h2>
+        <p class="section-desc">
+          Briefly explain what your project does and why it matters.
+        </p>
+        <div class="card abstract">
+          <p>
+            This project introduces <strong>Your Method Name</strong>, a framework for solving
+            challenging embodied intelligence tasks with strong robustness, generalization,
+            and efficiency. It combines perception, planning, and control in a unified system,
+            and achieves promising results across diverse environments.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="container">
+        <h2 class="section-title">Teaser / Demo</h2>
+        <p class="section-desc">
+          Put a short project video or a main figure here.
+        </p>
+
+        <div class="media-grid">
+          <div class="card">
+            <!-- 方式1：放本地视频，例如 assets/teaser.mp4 -->
+            <!--
+            <video controls autoplay muted loop playsinline>
+              <source src="assets/teaser.mp4" type="video/mp4">
+            </video>
+            -->
+
+            <!-- 方式2：先用占位 -->
+            <div class="placeholder">
+              Replace this with a teaser video, GIF, or main figure
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-bottom:10px;">Why it matters</h3>
+            <p style="color: var(--muted);">
+              Use this space to summarize your motivation, contributions, or experimental setup.
+              For example:
+            </p>
+            <ul style="margin-top:12px; padding-left: 20px; color: #edf1ff;">
+              <li>Generalizes across multiple environments</li>
+              <li>Improves task success and robustness</li>
+              <li>Supports real-world deployment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="highlights">
+      <div class="container">
+        <h2 class="section-title">Highlights</h2>
+        <p class="section-desc">
+          Show the key contributions or main technical ideas.
+        </p>
+
+        <div class="stats-grid">
+          <div class="card stat">
+            <h3>Unified Framework</h3>
+            <p>
+              Describe your method in one concise sentence. Keep it simple and impactful.
+            </p>
+          </div>
+          <div class="card stat">
+            <h3>Strong Performance</h3>
+            <p>
+              Mention benchmark gains, robustness improvements, or real-world transfer results.
+            </p>
+          </div>
+          <div class="card stat">
+            <h3>Practical Deployment</h3>
+            <p>
+              Emphasize that your method is deployable and useful beyond simulation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="container">
+        <h2 class="section-title">Results</h2>
+        <p class="section-desc">
+          Put some qualitative results, figures, or comparisons here.
+        </p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item card">
+            <img src="https://placehold.co/800x500/png" alt="Result 1">
+            <div class="caption">Result example 1</div>
+          </div>
+          <div class="gallery-item card">
+            <img src="https://placehold.co/800x500/png" alt="Result 2">
+            <div class="caption">Result example 2</div>
+          </div>
+          <div class="gallery-item card">
+            <img src="https://placehold.co/800x500/png" alt="Result 3">
+            <div class="caption">Result example 3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="links">
+      <div class="container">
+        <h2 class="section-title">Resources</h2>
+        <p class="section-desc">
+          Add the links most relevant to your visitors.
+        </p>
+
+        <div class="links-grid">
+          <a class="card link-card" href="#" target="_blank">
+            <h3>Paper</h3>
+            <p>Read the full paper and supplementary material.</p>
+          </a>
+          <a class="card link-card" href="#" target="_blank">
+            <h3>Code</h3>
+            <p>Open-source implementation and instructions.</p>
+          </a>
+          <a class="card link-card" href="#" target="_blank">
+            <h3>Dataset / Models</h3>
+            <p>Download resources used in the project.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="container">
+        <h2 class="section-title">Citation</h2>
+        <p class="section-desc">
+          Provide a BibTeX entry so others can easily cite your work.
+        </p>
+
+        <div class="card bibtex">
+          <button class="copy-btn" onclick="copyBibtex()">Copy</button>
+          <pre id="bibtex">@article{yourproject2026,
+  title   = {Your Project Title},
+  author  = {Author A and Author B and Author C},
+  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  year    = {2026}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Your Name / Lab. Built with GitHub Pages.
+    </div>
+  </footer>
+
+  <script>
+    function copyBibtex() {
+      const text = document.getElementById("bibtex").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector(".copy-btn");
+        const old = btn.innerText;
+        btn.innerText = "Copied!";
+        setTimeout(() => {
+          btn.innerText = old;
+        }, 1200);
+      });
+    }
+  </script>
+</body>
+</html>

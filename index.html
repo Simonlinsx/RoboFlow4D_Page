@@ -3,21 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Project Title</title>
-  <meta name="description" content="Project page for Your Project Title" />
+  <meta
+    name="description"
+    content="RoboFlow4D: A Lightweight Flow World Model Toward Real-Time Flow-Guided Robotic Manipulation"
+  />
+  <title>RoboFlow4D: A Lightweight Flow World Model</title>
+  <link rel="icon" type="image/svg+xml" href="flow-icon.svg" />
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-soft: #121933;
-      --card: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --text: #f5f7ff;
-      --muted: #b8c0e0;
-      --accent: #7c9cff;
-      --accent-2: #66e0c2;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-      --radius: 20px;
-      --maxw: 1100px;
+      --primary: #1f5f8b;
+      --primary-dark: #143f5f;
+      --bg-light: #f6f8fb;
+      --bg-dark: #111827;
+      --surface: #ffffff;
+      --surface-soft: #fbfcfe;
+      --text-primary: #111827;
+      --text-secondary: #52627a;
+      --text-muted: #728097;
+      --border: #dce3ee;
+      --shadow: 0 12px 32px rgba(17, 24, 39, 0.07);
+      --radius: 8px;
+      --maxw: 1120px;
     }
 
     * {
@@ -28,17 +34,15 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(124, 156, 255, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(102, 224, 194, 0.14), transparent 25%),
-        linear-gradient(180deg, #0a0f1e 0%, #0d1327 100%);
-      color: var(--text);
-      line-height: 1.65;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background: #ffffff;
+      overflow-x: hidden;
     }
 
     a {
@@ -46,10 +50,23 @@
       text-decoration: none;
     }
 
-    img, video {
+    img {
       max-width: 100%;
       display: block;
-      border-radius: 16px;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    section {
+      padding: 68px 0;
+      scroll-margin-top: 86px;
+    }
+
+    .alt-bg {
+      background: var(--bg-light);
     }
 
     .container {
@@ -60,98 +77,177 @@
     .nav {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(14px);
-      background: rgba(10, 15, 30, 0.65);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
       width: min(var(--maxw), calc(100% - 32px));
       margin: 0 auto;
+      min-height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
+      gap: 24px;
     }
 
     .brand {
-      font-weight: 700;
-      letter-spacing: 0.2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
-      gap: 18px;
+      align-items: center;
+      gap: 20px;
       flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .nav-links a {
-      color: var(--muted);
-      font-size: 0.95rem;
-      transition: 0.2s ease;
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
-      color: var(--text);
+      color: var(--primary);
     }
 
     .hero {
-      padding: 72px 0 42px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 82px 0 64px;
     }
 
-    .hero-box {
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow);
-      border-radius: 28px;
-      padding: 44px 32px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-box::after {
-      content: "";
-      position: absolute;
-      inset: auto -80px -80px auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(124,156,255,0.22), transparent 65%);
-      pointer-events: none;
+    .hero-content {
+      text-align: center;
+      max-width: 1040px;
+      margin: 0 auto;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1.1;
-      margin-bottom: 18px;
-      letter-spacing: -0.03em;
+      font-size: clamp(2.2rem, 4.55vw, 4.05rem);
+      line-height: 1.08;
+      margin: 0 auto 22px;
+      max-width: 1080px;
     }
 
-    .hero .subtitle {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 860px;
-      margin-bottom: 24px;
+    .title-logo {
+      display: inline-block;
+      width: clamp(2.9rem, 5vw, 4.7rem);
+      height: auto;
+      margin-right: 0.08em;
+      vertical-align: -0.16em;
     }
 
-    .authors {
-      color: #dbe1ff;
-      margin-bottom: 10px;
-      font-size: 1rem;
+    .hero .highlight {
+      display: inline-block;
+      background: linear-gradient(
+        90deg,
+        #f43f5e 0%,
+        #f59e0b 18%,
+        #22c55e 38%,
+        #06b6d4 58%,
+        #3b82f6 76%,
+        #a855f7 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .affiliations {
-      color: var(--muted);
-      margin-bottom: 26px;
+    .hero-subtitle {
+      max-width: 900px;
+      margin: 0 auto 22px;
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+    }
+
+    .hero-meta {
+      color: var(--text-secondary);
       font-size: 0.98rem;
+      margin: 0 auto 26px;
+      max-width: 980px;
+    }
+
+    .hero-authors {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2px 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .hero-authors span:not(:last-child)::after {
+      content: ",";
+      color: var(--text-secondary);
+      margin-left: 2px;
+    }
+
+    .hero-affiliations,
+    .hero-notes {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .hero-affiliations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px 16px;
+      margin: 0 auto 8px;
+      max-width: 900px;
+    }
+
+    .hero-affiliations span {
+      white-space: nowrap;
+    }
+
+    .hero-notes {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta sup {
+      font-size: 0.68em;
+      line-height: 0;
+    }
+
+    .hero-note {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 30px;
     }
 
     .button-row {
       display: flex;
-      gap: 14px;
+      justify-content: center;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
     }
 
     .btn {
@@ -159,192 +255,748 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 18px;
-      border-radius: 999px;
+      min-height: 44px;
+      min-width: 108px;
+      padding: 0 20px;
+      border-radius: var(--radius);
       font-weight: 600;
-      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
-      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.95rem;
+      border: 1px solid #2f343d;
+      background: #2f343d;
+      color: white;
+      box-shadow: 0 10px 22px rgba(17, 24, 39, 0.12);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
     .btn:hover {
       transform: translateY(-1px);
+      background: #23272f;
+      border-color: #23272f;
+      box-shadow: 0 12px 24px rgba(17, 24, 39, 0.16);
     }
 
-    .btn-primary {
-      background: linear-gradient(90deg, var(--accent), #98aefe);
-      color: white;
-      border: none;
-    }
-
+    .btn-primary,
     .btn-secondary {
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
+      background: #2f343d;
+      border-color: #2f343d;
+      color: white;
     }
 
-    .hero-note {
-      color: var(--muted);
-      font-size: 0.95rem;
+    .section-head {
+      margin-bottom: 24px;
     }
 
-    section {
-      padding: 28px 0;
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: #7a89aa;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 14px;
-      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: clamp(1.72rem, 3.2vw, 2.45rem);
+      line-height: 1.15;
+      margin-bottom: 12px;
     }
 
-    .section-desc {
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
+    .section-icon {
+      width: 40px;
+      height: 40px;
       border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .abstract p {
-      color: #e8ebff;
-      font-size: 1rem;
-    }
-
-    .media-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 20px;
-    }
-
-    .placeholder {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 260px;
-      text-align: center;
-      color: var(--muted);
-      border: 1px dashed rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.03);
-      border-radius: 16px;
-      padding: 16px;
+      background: #eef3f7;
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      flex-shrink: 0;
     }
 
-    .stats-grid,
-    .gallery-grid,
-    .links-grid {
+    .section-desc {
+      max-width: 780px;
+      color: var(--text-secondary);
+      font-size: 1.02rem;
+    }
+
+    .abstract-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .abstract-card p {
+      color: var(--text-secondary);
+      font-size: 1.04rem;
+    }
+
+    .abstract-card strong {
+      color: var(--text-primary);
+    }
+
+    .abstract-copy {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 14px;
+      color: var(--text-secondary);
+      font-size: 1.02rem;
     }
 
-    .stat h3,
-    .link-card h3 {
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card h3 {
+      font-size: 1.02rem;
       margin-bottom: 8px;
-      font-size: 1.05rem;
     }
 
-    .stat p,
-    .link-card p {
-      color: var(--muted);
+    .stat-card p {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    .interactive-showcase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .demo-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .demo-tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text-secondary);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    }
+
+    .demo-tab:hover,
+    .demo-tab.is-active {
+      background: #2f343d;
+      border-color: #2f343d;
+      color: #ffffff;
+    }
+
+    .interactive-frame {
+      display: block;
+      width: 100%;
+      height: min(72vh, 760px);
+      min-height: 560px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #f7f7f4;
+    }
+
+    .interactive-footer {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 16px;
+      margin-top: 14px;
+      color: var(--text-secondary);
       font-size: 0.95rem;
     }
 
-    .gallery-item img {
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.1);
+    .text-link {
+      color: var(--primary);
+      font-weight: 700;
+      white-space: nowrap;
     }
 
-    .caption {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 8px;
+    .pipeline-showcase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .bibtex {
+    .pipeline-reveal {
+      --pipeline-top-bottom: 35.43%;
+      --pipeline-bottom-top: 64.57%;
+      --pipeline-left-right: 23.55%;
+      --pipeline-right-left: 76.45%;
       position: relative;
       overflow: hidden;
+      aspect-ratio: 5081 / 3972;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
     }
 
-    pre {
+    .pipeline-reveal img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .pipeline-ghost {
+      opacity: 0.22;
+    }
+
+    .pipeline-layer {
+      opacity: 0;
+      animation-duration: 13s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: both;
+    }
+
+    .pipeline-stage-one {
+      clip-path: inset(0 var(--pipeline-left-right) var(--pipeline-top-bottom) 0);
+      animation-name: revealStageOne;
+    }
+
+    .pipeline-stage-two {
+      clip-path: inset(0 0 var(--pipeline-top-bottom) var(--pipeline-right-left));
+      animation-name: revealStageTwo;
+    }
+
+    .pipeline-stage-three {
+      clip-path: inset(var(--pipeline-bottom-top) 0 0 0);
+      animation-name: revealStageThree;
+    }
+
+    .pipeline-full {
+      animation-name: revealFullPipeline;
+    }
+
+    .pipeline-caption {
+      max-width: 980px;
+      margin: 22px auto 0;
+      text-align: left;
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .caption-label {
+      font-weight: 800;
+    }
+
+    .caption-flow {
+      color: #7a7330;
+    }
+
+    .caption-policy {
+      color: #3f63bd;
+    }
+
+    .caption-loop {
+      color: #3f3f3f;
+    }
+
+    @keyframes revealStageOne {
+      0%,
+      96% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes revealStageTwo {
+      0%,
+      26% {
+        opacity: 0;
+      }
+      34%,
+      96% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes revealStageThree {
+      0%,
+      50% {
+        opacity: 0;
+      }
+      58%,
+      96% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes revealFullPipeline {
+      0%,
+      72% {
+        opacity: 0;
+      }
+      82%,
+      96% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .sim-video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .sim-video-card {
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius);
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .sim-video-card h3 {
+      color: var(--text-primary);
+      font-size: 0.88rem;
+      font-weight: 650;
+      line-height: 1.35;
+      margin-top: 10px;
+    }
+
+    .sim-video-card video {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: var(--radius);
+      background: #000000;
+      border: 0;
+    }
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .video-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .video-card h3 {
+      font-size: 1.1rem;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .video-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .paired-video-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 16fr) minmax(0, 9fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .media-panel {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+
+    .media-panel-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .stage-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: #2f343d;
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .media-panel video {
+      width: 100%;
+      object-fit: contain;
+      border-radius: var(--radius);
+      background: #0f172a;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .real-video {
+      aspect-ratio: 16 / 9;
+    }
+
+    .flow-stage-video {
+      aspect-ratio: 1 / 1;
+    }
+
+    .results-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .results-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .results-card-head {
+      margin-bottom: 18px;
+    }
+
+    .results-card h3 {
+      font-size: 1.22rem;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .results-card p {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    .results-table-frame {
       overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      background: rgba(0,0,0,0.22);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      padding: 18px;
-      color: #eaf0ff;
-      font-size: 0.93rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+    }
+
+    .paper-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      background: white;
+      color: var(--text-primary);
+      font-size: 0.84rem;
+      line-height: 1.35;
+    }
+
+    .paper-table th,
+    .paper-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e7edf5;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .paper-table th:first-child,
+    .paper-table td:first-child {
+      text-align: left;
+      font-weight: 650;
+    }
+
+    .paper-table thead th {
+      background: #f3f6fa;
+      color: var(--text-primary);
+      font-weight: 800;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    .paper-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .paper-table .divider td,
+    .paper-table .divider th {
+      border-top: 2px solid #cbd5e1;
+    }
+
+    .paper-table .gain-row td {
+      background: #dcebf9;
+      color: #b91c1c;
+      font-weight: 800;
+    }
+
+    .paper-table .second-best {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .paper-table .metric-subhead th {
+      background: #f8fafc;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .resource-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37, 99, 235, 0.25);
+    }
+
+    .resource-card h3 {
+      font-size: 1.06rem;
+      margin-bottom: 8px;
+    }
+
+    .resource-card p {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    .citation-shell {
+      position: relative;
+      background: linear-gradient(180deg, #111a2d 0%, #0c1323 100%);
+      border-radius: var(--radius);
+      padding: 26px;
+      overflow: hidden;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.2);
     }
 
     .copy-btn {
       position: absolute;
       top: 18px;
       right: 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.08);
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
       color: white;
-      border-radius: 999px;
-      padding: 8px 12px;
+      border-radius: var(--radius);
       cursor: pointer;
       font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    pre {
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+      color: #dfe7ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
     }
 
     .footer {
-      padding: 30px 0 50px;
-      color: var(--muted);
+      background: var(--bg-dark);
+      color: rgba(255, 255, 255, 0.74);
+      padding: 34px 0;
       text-align: center;
       font-size: 0.92rem;
     }
 
-    .tag {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(124, 156, 255, 0.12);
-      color: #dfe6ff;
-      border: 1px solid rgba(124, 156, 255, 0.2);
-      font-size: 0.86rem;
-      margin-bottom: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .media-grid,
+    @media (max-width: 960px) {
+      .video-grid,
+      .sim-video-grid,
       .stats-grid,
-      .gallery-grid,
-      .links-grid {
+      .resources-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-box {
-        padding: 32px 22px;
+      .paired-video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .abstract-card,
+      .resource-card {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      section {
+        padding: 52px 0;
+      }
+
+      .container,
+      .nav-inner {
+        width: calc(100dvw - 28px);
+        max-width: calc(100dvw - 28px);
       }
 
       .nav-inner {
         align-items: flex-start;
-        gap: 12px;
+        justify-content: flex-start;
         flex-direction: column;
+        gap: 10px;
+        padding: 12px 0;
       }
+
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 14px;
+        justify-content: stretch;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+        white-space: normal;
+      }
+
+      .hero {
+        padding: 54px 0 44px;
+      }
+
+      .hero h1 {
+        font-size: clamp(1.9rem, 10vw, 2.32rem);
+        line-height: 1.1;
+        overflow-wrap: break-word;
+        max-width: 100%;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+        overflow-wrap: break-word;
+      }
+
+      .section-title {
+        align-items: flex-start;
+      }
+
+      .button-row {
+        width: 100%;
+      }
+
+      .button-row .btn {
+        width: 100%;
+      }
+
+      .demo-tab {
+        flex: 1 1 100%;
+      }
+
+      .section-title {
+        font-size: 1.78rem;
+        overflow-wrap: break-word;
+      }
+
+      .section-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .abstract-card,
+      .interactive-showcase,
+      .pipeline-showcase,
+      .results-card,
+      .video-card,
+      .resource-card {
+        padding: 16px;
+      }
+
+      .citation-shell {
+        padding: 58px 16px 18px;
+      }
+
+      pre {
+        font-size: 0.78rem;
+      }
+
     }
   </style>
 </head>
 <body>
-
   <nav class="nav">
     <div class="nav-inner">
-      <div class="brand">Your Project</div>
+      <div class="brand">
+        <img class="brand-logo" src="flow-icon.svg" alt="" aria-hidden="true" />
+        <span>RoboFlow4D</span>
+      </div>
       <div class="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#video">Video</a>
-        <a href="#highlights">Highlights</a>
-        <a href="#results">Results</a>
+        <a href="#interactive-demo">Interactive Demo</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#abstract">Abstract</a>
+        <a href="#sim-demos">Sim Videos</a>
+        <a href="#real-demos">Real Videos</a>
+        <a href="#quant-results">Quantitative Results</a>
         <a href="#citation">Citation</a>
       </div>
     </div>
@@ -352,183 +1004,769 @@
 
   <header class="hero">
     <div class="container">
-      <div class="hero-box">
-        <div class="tag">Project Page</div>
-        <h1>Your Project Title</h1>
-        <p class="subtitle">
-          A clean and modern project webpage template for showcasing your paper, code,
-          demos, and results on GitHub Pages.
-        </p>
-
-        <div class="authors">
-          Author A<sup>1</sup>, Author B<sup>2</sup>, Author C<sup>1</sup>
+      <div class="hero-content">
+        <h1>
+          <img class="title-logo" src="flow-icon.svg" alt="" aria-hidden="true" />
+          <span class="highlight">RoboFlow4D</span>: A Lightweight Flow World Model Toward
+          Real-Time Flow-Guided Robotic Manipulation
+        </h1>
+        <!-- <p class="hero-subtitle">
+          RoboFlow4D is an end-to-end lightweight flow world model that predicts multi-frame 3D
+          flows from RGB observations and textual instructions, enabling explicit flow-based
+          planning for real-time robotic manipulation.
+        </p> -->
+        <div class="hero-meta">
+          <div class="hero-authors">
+            <span>Sixu Lin<sup>1,*</sup></span>
+            <span>Junliang Chen<sup>2,*</sup></span>
+            <span>Huaiyuan Xu<sup>2,†</sup></span>
+            <span>Zhuohao Li<sup>3</sup></span>
+            <span>Guangming Wang<sup>4</sup></span>
+            <span>Yixiong Jing<sup>4</sup></span>
+            <span>Sheng Xu<sup>1</sup></span>
+            <span>Runyi Zhao<sup>1</sup></span>
+            <span>Brian Sheil<sup>4</sup></span>
+            <span>Lap-Pui Chau<sup>2</sup></span>
+            <span>Guiliang Liu<sup>1,3,†</sup></span>
+          </div>
+          <div class="hero-affiliations">
+            <span><sup>1</sup> School of Data Science, The Chinese University of Hong Kong (Shenzhen)</span>
+            <span><sup>2</sup> The Hong Kong Polytechnic University</span>
+            <span><sup>3</sup> Shenzhen Loop Area Institute</span>
+            <span><sup>4</sup> University of Cambridge</span>
+          </div>
+          <div class="hero-notes">
+            <span><sup>*</sup> Equal contribution</span>
+            <span><sup>†</sup> Corresponding authors</span>
+          </div>
         </div>
-        <div class="affiliations">
-          <sup>1</sup>Your University &nbsp; • &nbsp;
-          <sup>2</sup>Your Lab / Company
-        </div>
-
         <div class="button-row">
-          <a class="btn btn-primary" href="#" target="_blank">📄 Paper</a>
-          <a class="btn btn-secondary" href="#" target="_blank">💻 Code</a>
-          <a class="btn btn-secondary" href="#" target="_blank">🎥 Video</a>
-          <a class="btn btn-secondary" href="#" target="_blank">📊 Dataset</a>
-        </div>
-
-        <div class="hero-note">
-          Replace the placeholders with your actual links, video, figures, and abstract.
+          <a class="btn btn-primary" href="RoboFlow4D_latest.pdf" target="_blank" rel="noopener">Paper</a>
+          <a class="btn btn-secondary" href="#sim-demos">Video</a>
+          <a class="btn btn-secondary" href="#">Code</a>
         </div>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="overview">
+    <section id="interactive-demo" class="alt-bg">
       <div class="container">
-        <h2 class="section-title">Overview</h2>
-        <p class="section-desc">
-          Briefly explain what your project does and why it matters.
-        </p>
-        <div class="card abstract">
-          <p>
-            This project introduces <strong>Your Method Name</strong>, a framework for solving
-            challenging embodied intelligence tasks with strong robustness, generalization,
-            and efficiency. It combines perception, planning, and control in a unified system,
-            and achieves promising results across diverse environments.
+        <div class="section-head">
+          <h2 class="section-title">
+            <span class="section-icon">01</span>
+            Planning in 3D Space
+          </h2>
+        </div>
+
+        <div class="interactive-showcase">
+          <div class="demo-switcher" aria-label="Representative interactive demos">
+            <button
+              class="demo-tab is-active"
+              type="button"
+              data-demo-task="Turn on the stove and put the moka pot on it"
+              data-demo-src="representative_5_demos/KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it_demo/demo_demo_0/all_stages_3d.html"
+              aria-pressed="true"
+            >
+              Moka Pot
+            </button>
+            <button
+              class="demo-tab"
+              type="button"
+              data-demo-task="Put the black bowl in the bottom drawer and close it"
+              data-demo-src="representative_5_demos/KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it_demo/demo_demo_1/all_stages_3d.html"
+              aria-pressed="false"
+            >
+              Drawer
+            </button>
+            <button
+              class="demo-tab"
+              type="button"
+              data-demo-task="Pick up the book and place it in the caddy"
+              data-demo-src="representative_5_demos/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy_demo/demo_demo_0/all_stages_3d.html"
+              aria-pressed="false"
+            >
+              Book to Caddy
+            </button>
+            <button
+              class="demo-tab"
+              type="button"
+              data-demo-task="Push the cube with gripper query points"
+              data-demo-src="representative_5_demos/ManiSkill_PushCube/trajectory.rgb.pd_ee_delta_pose.physx_cpu/demo_15/all_stages_3d.html"
+              aria-pressed="false"
+            >
+              Push Cube
+            </button>
+          </div>
+          <iframe
+            id="interactive-demo-frame"
+            class="interactive-frame"
+            title="Interactive 3D flow demo for RoboFlow4D"
+            src="representative_5_demos/KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it_demo/demo_demo_0/all_stages_3d.html"
+            loading="eager"
+            allowfullscreen
+          ></iframe>
+          <div class="interactive-footer">
+            <span id="interactive-demo-task">Turn on the stove and put the moka pot on it</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pipeline">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">
+            <span class="section-icon">02</span>
+            Pipeline
+          </h2>
+        </div>
+
+        <div class="pipeline-showcase">
+          <div class="pipeline-reveal" aria-label="Animated RoboFlow4D pipeline">
+            <img
+              class="pipeline-ghost"
+              src="paper_fig/previews/pipeline-true.png"
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              class="pipeline-layer pipeline-stage-one"
+              src="paper_fig/previews/pipeline-true.png"
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              class="pipeline-layer pipeline-stage-two"
+              src="paper_fig/previews/pipeline-true.png"
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              class="pipeline-layer pipeline-stage-three"
+              src="paper_fig/previews/pipeline-true.png"
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              class="pipeline-layer pipeline-full"
+              src="paper_fig/previews/pipeline-true.png"
+              alt="RoboFlow4D full pipeline figure"
+            />
+          </div>
+
+          <p class="pipeline-caption">
+            <span class="caption-label caption-flow">Top left.</span>
+            RoboFlow4D encodes the RGB sequence, optional query points, and task instruction into
+            visual, point, and text tokens, then FlowDiT predicts future multi-frame 3D flows.
+            <span class="caption-label caption-policy">Top right.</span>
+            A policy learns actions conditioned on the current state and explicit flow.
+            <span class="caption-label caption-loop">Bottom.</span>
+            The observation-planning-execution loop uses RoboFlow4D as a slow planner and the
+            action policy as a fast executor.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="video">
+    <section id="abstract">
       <div class="container">
-        <h2 class="section-title">Teaser / Demo</h2>
-        <p class="section-desc">
-          Put a short project video or a main figure here.
-        </p>
+        <div class="section-head">
+          <div class="section-kicker">Abstract</div>
+          <h2 class="section-title">
+            <span class="section-icon">03</span>
+            Abstract
+          </h2>
+        </div>
 
-        <div class="media-grid">
-          <div class="card">
-            <!-- 方式1：放本地视频，例如 assets/teaser.mp4 -->
-            <!--
-            <video controls autoplay muted loop playsinline>
-              <source src="assets/teaser.mp4" type="video/mp4">
-            </video>
-            -->
-
-            <!-- 方式2：先用占位 -->
-            <div class="placeholder">
-              Replace this with a teaser video, GIF, or main figure
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 style="margin-bottom:10px;">Why it matters</h3>
-            <p style="color: var(--muted);">
-              Use this space to summarize your motivation, contributions, or experimental setup.
-              For example:
+        <div class="abstract-card">
+          <div class="abstract-copy">
+            <p>
+              Planning and acting in 3D environments is a fundamental capability for robotic
+              manipulation in the real world. Existing predictive flow planners often rely on
+              modular pipelines that stack multiple submodels, which increases computational
+              overhead and limits real-time deployment.
             </p>
-            <ul style="margin-top:12px; padding-left: 20px; color: #edf1ff;">
-              <li>Generalizes across multiple environments</li>
-              <li>Improves task success and robustness</li>
-              <li>Supports real-world deployment</li>
-            </ul>
+            <p>
+              RoboFlow4D addresses this limitation with a lightweight flow world model that directly
+              predicts multi-frame 3D flows from visual observations and textual instructions. The
+              predicted flows guide action generation in an observation-planning-execution closed
+              loop, improving manipulation success rates while remaining efficient enough for
+              real-time robotic control.
+            </p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="highlights">
-      <div class="container">
-        <h2 class="section-title">Highlights</h2>
-        <p class="section-desc">
-          Show the key contributions or main technical ideas.
-        </p>
 
         <div class="stats-grid">
-          <div class="card stat">
-            <h3>Unified Framework</h3>
-            <p>
-              Describe your method in one concise sentence. Keep it simple and impactful.
-            </p>
+          <div class="stat-card">
+            <h3>+6.2% / +11.0%</h3>
+            <p>Average success-rate gains on LIBERO and ManiSkill3 over the base policy.</p>
           </div>
-          <div class="card stat">
-            <h3>Strong Performance</h3>
-            <p>
-              Mention benchmark gains, robustness improvements, or real-world transfer results.
-            </p>
+          <div class="stat-card">
+            <h3>120x Faster Planning</h3>
+            <p>RoboFlow4D achieves a large speedup over modular flow-planning pipelines.</p>
           </div>
-          <div class="card stat">
-            <h3>Practical Deployment</h3>
-            <p>
-              Emphasize that your method is deployable and useful beyond simulation.
-            </p>
+          <div class="stat-card">
+            <h3>&lt; 1 Second Latency</h3>
+            <p>Goal-oriented planning remains lightweight enough for real-time deployment.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="results">
+    <section id="sim-demos">
       <div class="container">
-        <h2 class="section-title">Results</h2>
-        <p class="section-desc">
-          Put some qualitative results, figures, or comparisons here.
-        </p>
+        <div class="section-head">
+          <h2 class="section-title">
+            <span class="section-icon">04</span>
+            Simulation Success Videos
+          </h2>
+        </div>
 
-        <div class="gallery-grid">
-          <div class="gallery-item card">
-            <img src="https://placehold.co/800x500/png" alt="Result 1">
-            <div class="caption">Result example 1</div>
-          </div>
-          <div class="gallery-item card">
-            <img src="https://placehold.co/800x500/png" alt="Result 2">
-            <div class="caption">Result example 2</div>
-          </div>
-          <div class="gallery-item card">
-            <img src="https://placehold.co/800x500/png" alt="Result 3">
-            <div class="caption">Result example 3</div>
-          </div>
+        <div class="sim-video-grid">
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_object/flow_global/task01--init000--success--success=24of25--pick_up_the_cream_cheese_and_place_it_in_the_basket.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Pick up the cream cheese and place it in the basket</h3>
+          </article>
+
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_object/flow_global/task07--init000--success--success=24of25--pick_up_the_milk_and_place_it_in_the_basket.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Pick up the milk and place it in the basket</h3>
+          </article>
+
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_spatial/flow_global/task09--init000--success--success=20of25--pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Pick up the black bowl on the wooden cabinet and place it on the plate</h3>
+          </article>
+
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_spatial/flow_global/task05--init000--success--success=24of25--pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Pick up the black bowl on the ramekin and place it on the plate</h3>
+          </article>
+
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_goal/flow_global/task03--init001--success--success=19of25--open_the_top_drawer_and_put_the_bowl_inside.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Open the top drawer and put the bowl inside</h3>
+          </article>
+
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_goal/flow_global/task06--init001--success--success=20of25--put_the_cream_cheese_in_the_bowl.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Put the cream cheese in the bowl</h3>
+          </article>
+
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_10/flow_global/task08--init000--success--success=15of25--put_both_moka_pots_on_the_stove.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Put both moka pots on the stove</h3>
+          </article>
+
+          <article class="sim-video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source
+                src="action_policy_representative/libero_10/flow_global/task04--init000--success--success=16of25--put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <h3>Put the white mug on the left plate and the yellow-white mug on the right plate</h3>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="links">
+    <section id="real-demos" class="alt-bg">
       <div class="container">
-        <h2 class="section-title">Resources</h2>
-        <p class="section-desc">
-          Add the links most relevant to your visitors.
-        </p>
+        <div class="section-head">
+          <h2 class="section-title">
+            <span class="section-icon">05</span>
+            Real-World Videos &amp; Flow Visualization
+          </h2>
+        </div>
 
-        <div class="links-grid">
-          <a class="card link-card" href="#" target="_blank">
-            <h3>Paper</h3>
-            <p>Read the full paper and supplementary material.</p>
-          </a>
-          <a class="card link-card" href="#" target="_blank">
-            <h3>Code</h3>
-            <p>Open-source implementation and instructions.</p>
-          </a>
-          <a class="card link-card" href="#" target="_blank">
-            <h3>Dataset / Models</h3>
-            <p>Download resources used in the project.</p>
-          </a>
+        <div class="video-grid">
+          <article class="video-card">
+            <div class="video-card-head">
+              <h3>Pick up the brown cup and insert it into the black cup</h3>
+            </div>
+            <div class="paired-video-grid">
+              <div class="media-panel">
+                <div class="media-panel-title">Real Robot</div>
+                <video class="real-video" controls muted loop playsinline preload="metadata">
+                  <source src="real/assemble/assemble-1.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="media-panel">
+                <div class="media-panel-title">
+                  <span>Flow Visualization</span>
+                  <span class="stage-chip">Stage 1</span>
+                </div>
+                <video
+                  class="flow-stage-video"
+                  controls
+                  autoplay
+                  muted
+                  playsinline
+                  preload="metadata"
+                  data-stages="Flow_vis/assemble/seg_000_s00000_e00024/prefix_fixedbg.mp4|Flow_vis/assemble/seg_001_s00025_e00044/prefix_fixedbg.mp4"
+                ></video>
+              </div>
+            </div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-card-head">
+              <h3>Pick up the cup and place it in the white box</h3>
+            </div>
+            <div class="paired-video-grid">
+              <div class="media-panel">
+                <div class="media-panel-title">Real Robot</div>
+                <video class="real-video" controls muted loop playsinline preload="metadata">
+                  <source src="real/cup/cup-1.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="media-panel">
+                <div class="media-panel-title">
+                  <span>Flow Visualization</span>
+                  <span class="stage-chip">Stage 1</span>
+                </div>
+                <video
+                  class="flow-stage-video"
+                  controls
+                  autoplay
+                  muted
+                  playsinline
+                  preload="metadata"
+                  data-stages="Flow_vis/cup/seg_000_s00000_e00043/prefix_fixedbg.mp4|Flow_vis/cup/seg_001_s00044_e00076/prefix_fixedbg.mp4|Flow_vis/cup/seg_002_s00077_e00086/prefix_fixedbg.mp4"
+                ></video>
+              </div>
+            </div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-card-head">
+              <h3>Open the top drawer, place the red cube inside, and close it</h3>
+            </div>
+            <div class="paired-video-grid">
+              <div class="media-panel">
+                <div class="media-panel-title">Real Robot</div>
+                <video class="real-video" controls muted loop playsinline preload="metadata">
+                  <source src="real/drawer/drawer-1.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="media-panel">
+                <div class="media-panel-title">
+                  <span>Flow Visualization</span>
+                  <span class="stage-chip">Stage 1</span>
+                </div>
+                <video
+                  class="flow-stage-video"
+                  controls
+                  autoplay
+                  muted
+                  playsinline
+                  preload="metadata"
+                  data-stages="Flow_vis/drawer/seg_000_s00000_e00061/prefix_fixedbg.mp4|Flow_vis/drawer/seg_001_s00062_e00081/prefix_fixedbg.mp4|Flow_vis/drawer/seg_002_s00082_e00124/prefix_fixedbg.mp4"
+                ></video>
+              </div>
+            </div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-card-head">
+              <h3>Pick up the red cube and place it on the blue cube</h3>
+            </div>
+            <div class="paired-video-grid">
+              <div class="media-panel">
+                <div class="media-panel-title">Real Robot</div>
+                <video class="real-video" controls muted loop playsinline preload="metadata">
+                  <source src="real/stack/stack-1.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="media-panel">
+                <div class="media-panel-title">
+                  <span>Flow Visualization</span>
+                  <span class="stage-chip">Stage 1</span>
+                </div>
+                <video
+                  class="flow-stage-video"
+                  controls
+                  autoplay
+                  muted
+                  playsinline
+                  preload="metadata"
+                  data-stages="Flow_vis/stack/seg_000_s00000_e00035/prefix_fixedbg.mp4|Flow_vis/stack/seg_001_s00036_e00054/prefix_fixedbg.mp4|Flow_vis/stack/seg_002_s00055_e00068/prefix_fixedbg.mp4"
+                ></video>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
+
+    <section id="quant-results">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">
+            <span class="section-icon">06</span>
+            Quantitative Results
+          </h2>
+        </div>
+
+        <div class="results-stack">
+          <article class="results-card">
+            <div class="results-card-head">
+              <h3>LIBERO Benchmark</h3>
+              <p>Success rates (%) on fine-tuned robotic manipulation tasks.</p>
+            </div>
+            <div class="results-table-frame">
+              <table class="paper-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Spatial</th>
+                    <th>Object</th>
+                    <th>Goal</th>
+                    <th>Long</th>
+                    <th>Average</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Octo</td>
+                    <td>78.9</td>
+                    <td>85.7</td>
+                    <td>84.6</td>
+                    <td>51.1</td>
+                    <td>75.1</td>
+                  </tr>
+                  <tr>
+                    <td>CogACT</td>
+                    <td>87.5</td>
+                    <td>90.2</td>
+                    <td>78.4</td>
+                    <td>53.2</td>
+                    <td>77.3</td>
+                  </tr>
+                  <tr>
+                    <td>OpenVLA</td>
+                    <td>84.7</td>
+                    <td>88.4</td>
+                    <td>79.2</td>
+                    <td>53.7</td>
+                    <td>76.5</td>
+                  </tr>
+                  <tr>
+                    <td>TraceVLA</td>
+                    <td>84.6</td>
+                    <td>85.2</td>
+                    <td>75.1</td>
+                    <td>54.1</td>
+                    <td>74.8</td>
+                  </tr>
+                  <tr>
+                    <td>SpatialVLA</td>
+                    <td>88.2</td>
+                    <td>89.9</td>
+                    <td>78.6</td>
+                    <td>55.5</td>
+                    <td>78.1</td>
+                  </tr>
+                  <tr>
+                    <td>4D-VLA</td>
+                    <td>88.9</td>
+                    <td>95.2</td>
+                    <td><strong>90.9</strong></td>
+                    <td><strong>79.1</strong></td>
+                    <td><strong>88.6</strong></td>
+                  </tr>
+                  <tr class="divider">
+                    <td>DP</td>
+                    <td>81.6</td>
+                    <td>91.5</td>
+                    <td>78.4</td>
+                    <td>64.0</td>
+                    <td>78.9</td>
+                  </tr>
+                  <tr>
+                    <td>w/ RoboFlow4D</td>
+                    <td><span class="second-best">89.8</span></td>
+                    <td>93.2</td>
+                    <td>85.2</td>
+                    <td>72.0</td>
+                    <td>85.1</td>
+                  </tr>
+                  <tr class="gain-row">
+                    <td>&Delta;</td>
+                    <td>+8.2</td>
+                    <td>+1.7</td>
+                    <td>+6.8</td>
+                    <td>+8.0</td>
+                    <td>+6.2</td>
+                  </tr>
+                  <tr class="divider">
+                    <td>DiT</td>
+                    <td>84.2</td>
+                    <td><span class="second-best">96.3</span></td>
+                    <td>85.4</td>
+                    <td>68.8</td>
+                    <td>83.7</td>
+                  </tr>
+                  <tr>
+                    <td>w/ RoboFlow4D</td>
+                    <td><strong>90.2</strong></td>
+                    <td><strong>97.0</strong></td>
+                    <td><span class="second-best">88.4</span></td>
+                    <td><span class="second-best">75.2</span></td>
+                    <td><span class="second-best">87.7</span></td>
+                  </tr>
+                  <tr class="gain-row">
+                    <td>&Delta;</td>
+                    <td>+6.0</td>
+                    <td>+0.7</td>
+                    <td>+3.0</td>
+                    <td>+6.4</td>
+                    <td>+4.0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="results-card">
+            <div class="results-card-head">
+              <h3>Real-World Results</h3>
+              <p>Success rate (%) and completion time (seconds), averaged over about 20 trials.</p>
+            </div>
+            <div class="results-table-frame">
+              <table class="paper-table">
+                <thead>
+                  <tr>
+                    <th rowspan="2">Method</th>
+                    <th colspan="2">Pick-and-Place</th>
+                    <th colspan="2">Stack</th>
+                    <th colspan="2">Assemble</th>
+                    <th colspan="2">Drawer</th>
+                    <th colspan="2">Avg.</th>
+                  </tr>
+                  <tr class="metric-subhead">
+                    <th>Succ. &uarr;</th>
+                    <th>Time &darr;</th>
+                    <th>Succ. &uarr;</th>
+                    <th>Time &darr;</th>
+                    <th>Succ. &uarr;</th>
+                    <th>Time &darr;</th>
+                    <th>Succ. &uarr;</th>
+                    <th>Time &darr;</th>
+                    <th>Succ. &uarr;</th>
+                    <th>Time &darr;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>&pi;<sub>0</sub>-Fast</td>
+                    <td>70.0</td>
+                    <td>55.9</td>
+                    <td>20.0</td>
+                    <td>41.6</td>
+                    <td><span class="second-best">30.0</span></td>
+                    <td>56.3</td>
+                    <td>10.0</td>
+                    <td>88.2</td>
+                    <td>32.5</td>
+                    <td>60.5</td>
+                  </tr>
+                  <tr>
+                    <td>&pi;<sub>0</sub></td>
+                    <td><span class="second-best">80.0</span></td>
+                    <td>37.6</td>
+                    <td><strong>30.0</strong></td>
+                    <td>28.0</td>
+                    <td><strong>40.0</strong></td>
+                    <td>35.3</td>
+                    <td><span class="second-best">15.0</span></td>
+                    <td>62.0</td>
+                    <td><span class="second-best">41.3</span></td>
+                    <td>40.7</td>
+                  </tr>
+                  <tr class="divider">
+                    <td>DP</td>
+                    <td>60.0</td>
+                    <td><span class="second-best">31.0</span></td>
+                    <td>20.0</td>
+                    <td><span class="second-best">26.4</span></td>
+                    <td>25.0</td>
+                    <td>34.2</td>
+                    <td>5.0</td>
+                    <td><span class="second-best">61.2</span></td>
+                    <td>27.5</td>
+                    <td><span class="second-best">38.2</span></td>
+                  </tr>
+                  <tr>
+                    <td>w/ RoboFlow4D</td>
+                    <td><span class="second-best">80.0</span></td>
+                    <td><strong>30.0</strong></td>
+                    <td><span class="second-best">25.0</span></td>
+                    <td><strong>26.2</strong></td>
+                    <td><strong>40.0</strong></td>
+                    <td><strong>31.0</strong></td>
+                    <td><span class="second-best">15.0</span></td>
+                    <td><strong>60.0</strong></td>
+                    <td>40.0</td>
+                    <td><strong>36.8</strong></td>
+                  </tr>
+                  <tr class="gain-row">
+                    <td>&Delta;</td>
+                    <td>+20.0</td>
+                    <td>-1.0</td>
+                    <td>+5.0</td>
+                    <td>-0.2</td>
+                    <td>+15.0</td>
+                    <td>-3.2</td>
+                    <td>+10.0</td>
+                    <td>-1.2</td>
+                    <td>+12.5</td>
+                    <td>-1.4</td>
+                  </tr>
+                  <tr class="divider">
+                    <td>DiT</td>
+                    <td>70.0</td>
+                    <td>32.5</td>
+                    <td>20.0</td>
+                    <td>28.1</td>
+                    <td><span class="second-best">30.0</span></td>
+                    <td>35.1</td>
+                    <td>10.0</td>
+                    <td>62.2</td>
+                    <td>32.5</td>
+                    <td>39.5</td>
+                  </tr>
+                  <tr>
+                    <td>w/ RoboFlow4D</td>
+                    <td><strong>90.0</strong></td>
+                    <td><span class="second-best">31.0</span></td>
+                    <td><span class="second-best">25.0</span></td>
+                    <td>26.8</td>
+                    <td><strong>40.0</strong></td>
+                    <td><span class="second-best">33.2</span></td>
+                    <td><strong>20.0</strong></td>
+                    <td>62.0</td>
+                    <td><strong>43.8</strong></td>
+                    <td>38.3</td>
+                  </tr>
+                  <tr class="gain-row">
+                    <td>&Delta;</td>
+                    <td>+20.0</td>
+                    <td>-1.5</td>
+                    <td>+5.0</td>
+                    <td>-1.3</td>
+                    <td>+10.0</td>
+                    <td>-1.9</td>
+                    <td>+10.0</td>
+                    <td>-0.2</td>
+                    <td>+11.3</td>
+                    <td>-1.2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="links">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">
+            <span class="section-icon">06</span>
+            Quick Access
+          </h2>
+        </div>
+
+        <div class="resources-grid">
+          <a class="resource-card" href="RoboFlow4D_latest.pdf" target="_blank" rel="noopener">
+            <h3>Paper PDF</h3>
+            <p>Open the full RoboFlow4D paper.</p>
+          </a>
+          <a class="resource-card" href="#interactive-demo">
+            <h3>Interactive Demo</h3>
+            <p>Turn on the stove and put the moka pot on it.</p>
+          </a>
+          <a class="resource-card" href="#pipeline">
+            <h3>Pipeline</h3>
+            <p>Review the staged visual overview of the RoboFlow4D workflow.</p>
+          </a>
+          <a class="resource-card" href="#abstract">
+            <h3>Abstract</h3>
+            <p>Jump to the abstract section for a concise paper summary.</p>
+          </a>
+          <a class="resource-card" href="#real-demos">
+            <h3>Real Videos</h3>
+            <p>Go directly to the embedded real-robot manipulation demos.</p>
+          </a>
+          <a class="resource-card" href="#quant-results">
+            <h3>Quantitative Results</h3>
+            <p>Browse the benchmark tables and supporting quantitative comparisons.</p>
+          </a>
+          <a class="resource-card" href="#citation">
+            <h3>BibTeX</h3>
+            <p>Find the citation block for easy reference and copy.</p>
+          </a>
+        </div>
+      </div>
+    </section> -->
+
+
 
     <section id="citation">
       <div class="container">
-        <h2 class="section-title">Citation</h2>
-        <p class="section-desc">
-          Provide a BibTeX entry so others can easily cite your work.
-        </p>
+        <div class="section-head">
+          <h2 class="section-title">
+            <span class="section-icon">07</span>
+            BibTeX
+          </h2>
+        </div>
 
-        <div class="card bibtex">
+        <div class="citation-shell">
           <button class="copy-btn" onclick="copyBibtex()">Copy</button>
-          <pre id="bibtex">@article{yourproject2026,
-  title   = {Your Project Title},
-  author  = {Author A and Author B and Author C},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+          <pre id="bibtex">@inproceedings{lin2026roboflow4d,
+  title   = {RoboFlow4D: A Lightweight Flow World Model Toward Real-Time Flow-Guided Robotic Manipulation},
+  author  = {Sixu Lin and Junliang Chen and Huaiyuan Xu and Zhuohao Li and Guangming Wang and Yixiong Jing and Sheng Xu and Runyi Zhao and Brian Sheil and Lap-Pui Chau and Guiliang Liu},
+  booktitle = {International Conference on Machine Learning (ICML)},
   year    = {2026}
 }</pre>
         </div>
@@ -538,11 +1776,77 @@
 
   <footer class="footer">
     <div class="container">
-      © 2026 Your Name / Lab. Built with GitHub Pages.
+      RoboFlow4D project page.
     </div>
   </footer>
 
   <script>
+    function initInteractiveDemoSwitcher() {
+      const frame = document.getElementById("interactive-demo-frame");
+      const taskLabel = document.getElementById("interactive-demo-task");
+      const tabs = document.querySelectorAll(".demo-tab");
+
+      if (!frame || !taskLabel || !tabs.length) {
+        return;
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((item) => {
+            item.classList.remove("is-active");
+            item.setAttribute("aria-pressed", "false");
+          });
+
+          tab.classList.add("is-active");
+          tab.setAttribute("aria-pressed", "true");
+          frame.src = tab.dataset.demoSrc;
+          taskLabel.innerText = tab.dataset.demoTask;
+        });
+      });
+    }
+
+    function initFlowStageVideos() {
+      document.querySelectorAll(".flow-stage-video").forEach((video) => {
+        const stages = (video.dataset.stages || "").split("|").filter(Boolean);
+        if (!stages.length) {
+          return;
+        }
+
+        const panel = video.closest(".media-panel");
+        const stageLabel = panel ? panel.querySelector(".stage-chip") : null;
+        let stageIndex = 0;
+
+        function setStage(nextIndex, shouldPlay) {
+          stageIndex = (nextIndex + stages.length) % stages.length;
+          video.src = stages[stageIndex];
+
+          if (stageLabel) {
+            stageLabel.innerText = `Stage ${stageIndex + 1}`;
+          }
+
+          video.load();
+          if (shouldPlay) {
+            const playPromise = video.play();
+            if (playPromise) {
+              playPromise.catch(() => {});
+            }
+          }
+        }
+
+        video.addEventListener("ended", () => {
+          setStage(stageIndex + 1, true);
+        });
+
+        video.addEventListener("error", () => {
+          if (stages.length > 1) {
+            setStage(stageIndex + 1, true);
+          }
+        });
+
+        setStage(0, video.autoplay);
+      });
+    }
+
     function copyBibtex() {
       const text = document.getElementById("bibtex").innerText;
       navigator.clipboard.writeText(text).then(() => {
@@ -554,6 +1858,11 @@
         }, 1200);
       });
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initInteractiveDemoSwitcher();
+      initFlowStageVideos();
+    });
   </script>
 </body>
 </html>
